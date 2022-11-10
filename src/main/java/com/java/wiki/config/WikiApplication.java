@@ -1,4 +1,4 @@
-package com.java.wiki;
+package com.java.wiki.config;
 
 
 import org.slf4j.Logger;
@@ -7,9 +7,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.stereotype.Component;
 
+@ComponentScan("com.java")
+//@ComponentScan("com.java","com.test")
 @SpringBootApplication
 public class WikiApplication {
     private static final Logger LOG = LoggerFactory.getLogger(WikiApplication.class);
