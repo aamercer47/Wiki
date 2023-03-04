@@ -2,6 +2,7 @@ package com.java.wiki.controller;
 //开发HelloWorld接口
 
 import com.java.wiki.domain.Ebook;
+import com.java.wiki.resp.CommonResp;
 import com.java.wiki.service.EbookService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +20,11 @@ public class EbookController {
     private EbookService ebookService;
 
     @GetMapping("/list")
-    public List<Ebook> list(){
-
-        return ebookService.list();
+    public CommonResp list(){
+        CommonResp<List<Ebook>> resp = new CommonResp<>();//<object>泛型是实际返回业务数据的类型，即content的类型
+        List<Ebook> list = ebookService.list();
+        resp.setContent(list);
+        return resp;
     }
 
 
