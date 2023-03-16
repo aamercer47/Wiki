@@ -8,6 +8,7 @@ import com.java.wiki.req.EbookReq;
 import com.java.wiki.resp.EbookResp;
 import com.java.wiki.util.CopyUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,7 +22,10 @@ public class EbookService {
     public List<EbookResp> list(EbookReq req){
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();//Criteria:相当于Where条件
-        criteria= criteria.andNameLike("%"+req.getName()+"%");
+        //动态SQL
+        if(!ObjectUtils.isEmpty(req.getName())){//如果它不为空的判断
+            criteria.andNameLike("%"+req.getName()+"%");
+        }
         List<Ebook> ebookList = ebookMapper.selectByExample(ebookExample);
         //持久层返回List<Eboook>需要转成List<EbookResp>再返回controller
 //        List<EbookResp> respList=new ArrayList<>();
