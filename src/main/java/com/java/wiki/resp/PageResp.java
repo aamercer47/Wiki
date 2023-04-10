@@ -2,7 +2,7 @@ package com.java.wiki.resp;
 
 import java.util.List;
 
-public class PageResp<T> {
+public class PageResp <T>{
     private long total;
 
     private List<T> list;
@@ -22,6 +22,7 @@ public class PageResp<T> {
     public void setList(List<T> list) {
         this.list = list;
     }
+
 
     @Override
     public String toString() {

@@ -35,7 +35,7 @@ public class EbookService {
         if(!ObjectUtils.isEmpty(req.getName())){//如果它不为空的判断
             criteria.andNameLike("%"+req.getName()+"%");
         }
-        PageHelper.startPage(req.getPage(),req.getSize());//动态查询
+        PageHelper.startPage(req.getPage(),req.getSize());//查询第一页第三条。
         List<Ebook> ebookList = ebookMapper.selectByExample(ebookExample);
 
         PageInfo<Ebook> pageInfo = new PageInfo<>(ebookList);
@@ -53,13 +53,16 @@ public class EbookService {
 //            respList.add(ebookResp);
 //        }
 
+
+
         //列表复制
         List<EbookResp> list = CopyUtil.copyList(ebookList, EbookResp.class);
 
-        PageResp<EbookResp> pageResp = new PageResp();
-        pageResp.setTotal(pageInfo.getTotal());
-        pageResp.setList(list);
+        PageResp<EbookResp> pageResp = new PageResp<>();
 
+        pageResp.setTotal(pageInfo.getTotal());
+
+        pageResp.setList(list);
 
         return pageResp;
     }
