@@ -1,6 +1,5 @@
 package com.java.wiki.service;
 
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.java.wiki.domain.Ebook;
@@ -19,7 +18,6 @@ import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
-
 
 @Service
 public class EbookService {
@@ -85,5 +83,10 @@ public class EbookService {
             ebookMapper.updateByPrimaryKey(ebook);
         }
 
+    }
+
+
+    public void delete(Long id) {
+        ebookMapper.deleteByPrimaryKey(id);
     }
 }

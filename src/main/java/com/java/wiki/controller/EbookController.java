@@ -1,6 +1,5 @@
 package com.java.wiki.controller;
 //开发HelloWorld接口
-
 import com.java.wiki.req.EbookQueryReq;
 import com.java.wiki.req.EbookSaveReq;
 import com.java.wiki.resp.CommonResp;
@@ -31,6 +30,13 @@ public class EbookController {
     public CommonResp save(@RequestBody EbookSaveReq req){
         CommonResp resp = new CommonResp<>();
         ebookService.save(req);
+        return resp;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public CommonResp delete(@PathVariable Long id) {
+        CommonResp resp = new CommonResp<>();
+        ebookService.delete(id);
         return resp;
     }
 
