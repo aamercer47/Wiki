@@ -38,6 +38,9 @@ public class EbookService {
         if(!ObjectUtils.isEmpty(req.getName())){//如果它不为空的判断
             criteria.andNameLike("%"+req.getName()+"%");
         }
+        if (!ObjectUtils.isEmpty(req.getCategoryId2())) {
+            criteria.andCategory2IdEqualTo(req.getCategoryId2());
+        }
         PageHelper.startPage(req.getPage(),req.getSize());//查询第一页第三条。
         List<Ebook> ebookList = ebookMapper.selectByExample(ebookExample);
 
