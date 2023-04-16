@@ -3,14 +3,15 @@ package com.java.wiki.controller;
 
 import com.java.wiki.req.CategoryQueryReq;
 import com.java.wiki.req.CategorySaveReq;
-import com.java.wiki.resp.CommonResp;
 import com.java.wiki.resp.CategoryQueryResp;
+import com.java.wiki.resp.CommonResp;
 import com.java.wiki.resp.PageResp;
 import com.java.wiki.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController //返回字符串
 //@Controller  //返回页面
@@ -19,6 +20,14 @@ public class CategoryController {
 
     @Resource
     private CategoryService categoryService;
+
+    @GetMapping("/all")
+    public CommonResp all() {
+        CommonResp<List<CategoryQueryResp>> resp = new CommonResp<>();
+        List<CategoryQueryResp> list = categoryService.all();
+        resp.setContent(list);
+        return resp;
+    }
 
     @GetMapping("/list")
     public CommonResp list(@Valid CategoryQueryReq req) {
