@@ -67,10 +67,22 @@ insert into `category` (id, parent, name, sort) VALUES (501,500,'服务器',501)
 insert into `category` (id, parent, name, sort) VALUES (502,500,'开发工具',502);
 insert into `category` (id, parent, name, sort) VALUES (503,500,'热门服务器语言',503);
 
-drop table if exists `demo`;
-create table `demo` (
+drop table if exists `doc`;
+create  table `doc`(
     `id` bigint not null comment 'id',
-    `name` varchar(50) comment '名称',
+    `ebook_id` bigint not null default 0 comment '电子书id',
+    `parent` bigint not null default 0 comment '父id',
+    `name` varchar(50) not null comment '名称',
+    `sort` int comment '顺序',
+    `view_count` int default 0 comment '阅读数',
+    `vote_count` int default 0 comment '点赞数',
     primary key (`id`)
-)
+) engine=innodb default charset=utf8mb4 comment='文档';
+
+insert into `doc` (id, ebook_id, parent, name, sort, view_count, vote_count) VALUES (1,1,0,'文档1',1,0,0);
+insert into `doc` (id, ebook_id, parent, name, sort, view_count, vote_count) VALUES (2,1,1,'文档1.1',1,0,0);
+insert into `doc` (id, ebook_id, parent, name, sort, view_count, vote_count) VALUES (3,1,0,'文档2',2,0,0);
+insert into `doc` (id, ebook_id, parent, name, sort, view_count, vote_count) VALUES (4,1,3,'文档2.1',1,0,0);
+insert into `doc` (id, ebook_id, parent, name, sort, view_count, vote_count) VALUES (5,1,3,'文档2.2',2,0,0);
+insert into `doc` (id, ebook_id, parent, name, sort, view_count, vote_count) VALUES (6,1,5,'文档2.2.1',1,0,0);
 
