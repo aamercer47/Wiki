@@ -78,13 +78,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, ref } from 'vue';
+  import {createVNode, defineComponent, onMounted, ref } from 'vue';
   import axios from 'axios';
-  import { message } from 'ant-design-vue';
+  import { message, Modal } from 'ant-design-vue';
   import {Tool} from "@/util/tool";
   import { useRoute } from 'vue-router';
   import wrapperRaf from "ant-design-vue/es/_util/raf";
   import ids = wrapperRaf.ids;
+  import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 
   export default defineComponent({
     name: 'AdminDoc',
@@ -214,6 +215,8 @@
       };
 
       const Ids: Array<string> = [];
+      const deleteIds: Array<string> = [];
+      const deleteNames: Array<string> = [];
       /**
        * 查找整根树枝
        */
@@ -280,15 +283,35 @@
 
       const handleDelete = (id: number) => {
         // console.log(level1.value,id)
+        deleteIds.length = 0;
+        deleteNames.length = 0;
         getDeleteIds(level1.value, id);
         // console.log(ids)
-        axios.delete("/doc/delete/" + Ids.join(",")).then((response) => {
-          const data = response.data; // data = commonResp
-          if (data.success) {
-            // 重新加载列表
-            handleQuery();
-          }
+        Modal.confirm({
+          title: '重要提醒',
+          icon: createVNode(ExclamationCircleOutlined),
+          content: '将删除：【' + deleteNames.join("，") + "】删除后不可恢复，确认删除？",
+          onOk() {
+            // console.log(ids)
+            axios.delete("/doc/delete/" + deleteIds.join(",")).then((response) => {
+              const data = response.data; // data = commonResp
+              if (data.success) {
+                // 重新加载列表
+                handleQuery();
+              } else {
+                message.error(data.message);
+              }
+            });
+          },
         });
+
+        // axios.delete("/doc/delete/" + Ids.join(",")).then((response) => {
+        //   const data = response.data; // data = commonResp
+        //   if (data.success) {
+        //     // 重新加载列表
+        //     handleQuery();
+        //   }
+        // });
       };
 
       onMounted(() => {
