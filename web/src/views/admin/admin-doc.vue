@@ -214,7 +214,7 @@
         }
       };
 
-      const Ids: Array<string> = [];
+      // const Ids: Array<string> = [];
       const deleteIds: Array<string> = [];
       const deleteNames: Array<string> = [];
       /**
@@ -230,7 +230,9 @@
             console.log("delete", node);
             // 将目标ID放入结果集ids
             // node.disabled = true;
-            Ids.push(id);
+            deleteIds.push(id);
+            deleteNames.push(node.name);
+
 
             // 遍历所有子节点
             const children = node.children;
