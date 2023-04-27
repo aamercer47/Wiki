@@ -38,6 +38,7 @@ public class ControllerExceptionHandler {
 
     /**
      * 校验异常统一处理
+     *
      * @param e
      * @return
      */
@@ -53,6 +54,7 @@ public class ControllerExceptionHandler {
 
     /**
      * 校验异常统一处理
+     *
      * @param e
      * @return
      */
@@ -65,5 +67,4 @@ public class ControllerExceptionHandler {
         commonResp.setMessage("系统出现异常，请联系管理员");
         return commonResp;
     }
-}
 }
