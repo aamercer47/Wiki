@@ -200,7 +200,7 @@
       // treeSelectData.value = [];
       const doc = ref();
       doc.value = {
-        // ebookId: route.query.ebookId
+        ebookId: route.query.ebookId
       };
       const modalVisible = ref(false);
       const modalLoading = ref(false);
