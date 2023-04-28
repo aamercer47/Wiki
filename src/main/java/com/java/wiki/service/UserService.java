@@ -7,10 +7,12 @@ import com.java.wiki.domain.UserExample;
 import com.java.wiki.exception.BusinessException;
 import com.java.wiki.exception.BusinessExceptionCode;
 import com.java.wiki.mapper.UserMapper;
+import com.java.wiki.req.UserLoginReq;
 import com.java.wiki.req.UserQueryReq;
 import com.java.wiki.req.UserResetPasswordReq;
 import com.java.wiki.req.UserSaveReq;
 import com.java.wiki.resp.PageResp;
+import com.java.wiki.resp.UserLoginResp;
 import com.java.wiki.resp.UserQueryResp;
 import com.java.wiki.util.CopyUtil;
 import com.java.wiki.util.SnowFlake;
@@ -116,25 +118,25 @@ public class UserService {
         userMapper.updateByPrimaryKeySelective(user);
     }
 
-//    /**
-//     * 登录
-//     */
-//    public UserLoginResp login(UserLoginReq req) {
-//        User userDb = selectByLoginName(req.getLoginName());
-//        if (ObjectUtils.isEmpty(userDb)) {
-//            // 用户名不存在
-//            LOG.info("用户名不存在, {}", req.getLoginName());
-//            throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
-//        } else {
-//            if (userDb.getPassword().equals(req.getPassword())) {
-//                // 登录成功
-//                UserLoginResp userLoginResp = CopyUtil.copy(userDb, UserLoginResp.class);
-//                return userLoginResp;
-//            } else {
-//                // 密码不对
-//                LOG.info("密码不对, 输入密码：{}, 数据库密码：{}", req.getPassword(), userDb.getPassword());
-//                throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
-//            }
-//        }
-//    }
+    /**
+     * 登录
+     */
+    public UserLoginResp login(UserLoginReq req) {
+        User userDb = selectByLoginName(req.getLoginName());
+        if (ObjectUtils.isEmpty(userDb)) {
+            // 用户名不存在
+            LOG.info("用户名不存在, {}", req.getLoginName());
+            throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
+        } else {
+            if (userDb.getPassword().equals(req.getPassword())) {
+                // 登录成功
+                UserLoginResp userLoginResp = CopyUtil.copy(userDb, UserLoginResp.class);
+                return userLoginResp;
+            } else {
+                // 密码不对
+                LOG.info("密码不对, 输入密码：{}, 数据库密码：{}", req.getPassword(), userDb.getPassword());
+                throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
+            }
+        }
+    }
 }
