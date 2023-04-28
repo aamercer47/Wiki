@@ -80,7 +80,7 @@
   >
     <a-form :model="user" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
       <a-form-item label="新密码">
-        <a-input v-model:value="user.password" type="password"/>
+        <a-input v-model:value="user.password" />
       </a-form-item>
     </a-form>
   </a-modal>
@@ -225,7 +225,7 @@ export default defineComponent({
       });
     };
 
-    // -------- 重置密码 ---------
+    // --------- 重置密码 ----------
     const resetModalVisible = ref(false);
     const resetModalLoading = ref(false);
     const handleResetModalOk = () => {
@@ -256,7 +256,7 @@ export default defineComponent({
     const resetPassword = (record: any) => {
       resetModalVisible.value = true;
       user.value = Tool.copy(record);
-      user.value.password = null;
+      user.value.password = null;//清空密码
     };
 
     onMounted(() => {

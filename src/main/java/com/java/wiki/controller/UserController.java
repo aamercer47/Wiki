@@ -1,6 +1,7 @@
 package com.java.wiki.controller;
 
 import com.java.wiki.req.UserQueryReq;
+import com.java.wiki.req.UserResetPasswordReq;
 import com.java.wiki.req.UserSaveReq;
 import com.java.wiki.resp.CommonResp;
 import com.java.wiki.resp.PageResp;
@@ -53,13 +54,13 @@ public class UserController {
         return resp;
     }
 
-//    @PostMapping("/reset-password")
-//    public CommonResp resetPassword(@Valid @RequestBody UserResetPasswordReq req) {
-//        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
-//        CommonResp resp = new CommonResp<>();
-//        userService.resetPassword(req);
-//        return resp;
-//    }
+    @PostMapping("/reset-password")
+    public CommonResp resetPassword(@Valid @RequestBody UserResetPasswordReq req) {
+        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
+        CommonResp resp = new CommonResp<>();
+        userService.resetPassword(req);
+        return resp;
+    }
 
 //    @PostMapping("/login")
 //    public CommonResp login(@Valid @RequestBody UserLoginReq req) {
