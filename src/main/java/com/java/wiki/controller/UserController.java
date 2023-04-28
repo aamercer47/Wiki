@@ -40,7 +40,7 @@ public class UserController {
 
     @PostMapping("/save")
     public CommonResp save(@Valid @RequestBody UserSaveReq req) {
-        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
+        req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));//密码加密存储,md5
         CommonResp resp = new CommonResp<>();
         userService.save(req);
         return resp;

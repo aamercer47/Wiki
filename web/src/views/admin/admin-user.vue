@@ -92,6 +92,7 @@ import axios from 'axios';
 import { message } from 'ant-design-vue';
 import {Tool} from "@/util/tool";
 
+//md5加密存在
 declare let hexMd5: any;
 declare let KEY: any;
 
@@ -174,7 +175,7 @@ export default defineComponent({
     const handleModalOk = () => {
       modalLoading.value = true;
 
-      user.value.password = hexMd5(user.value.password + KEY);
+      user.value.password = hexMd5(user.value.password + KEY);//MD5码
 
       axios.post("/user/save", user.value).then((response) => {
         modalLoading.value = false;
