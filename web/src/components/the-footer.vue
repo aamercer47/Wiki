@@ -8,6 +8,7 @@
 <script lang="ts">
 import store from '@/store';
 import { Tool } from '@/util/tool';
+import { notification } from 'ant-design-vue';
 import {computed, defineComponent, onMounted} from 'vue';
 
   export default defineComponent({
@@ -22,10 +23,10 @@ import {computed, defineComponent, onMounted} from 'vue';
       };
       const onMessage = (event: any) => {
         console.log('WebSocket收到消息：', event.data);
-        // notification['info']({
-        //   message: '收到消息',
-        //   description: event.data,
-        // });
+        notification['info']({
+          message: '收到消息',
+          description: event.data,
+        });
       };
       const onError = () => {
         console.log('WebSocket连接错误，状态码：', websocket.readyState)
