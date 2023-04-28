@@ -1,7 +1,6 @@
 package com.java.wiki.config;
 
-
-import com.java.wiki.interceptor.LogInterceptor;
+import com.java.wiki.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -12,7 +11,10 @@ import javax.annotation.Resource;
 public class SpringMvcConfig implements WebMvcConfigurer {
 
     @Resource
-    LogInterceptor loginInterceptor;
+    LoginInterceptor loginInterceptor;
+
+//    @Resource
+//    ActionInterceptor actionInterceptor;
 
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
@@ -24,9 +26,15 @@ public class SpringMvcConfig implements WebMvcConfigurer {
                         "/category/all",
                         "/ebook/list",
                         "/doc/all/**",
-//                        "/doc/vote/**",
-                        "/doc/find-content/**"
-//                        "/ebook-snapshot/**"
+                        "/doc/vote/**",
+                        "/doc/find-content/**",
+                        "/ebook-snapshot/**"
                 );
+
+//        registry.addInterceptor(actionInterceptor)
+//                .addPathPatterns(
+//                        "/*/save",
+//                        "/*/delete/**",
+//                        "/*/reset-password");
     }
 }
