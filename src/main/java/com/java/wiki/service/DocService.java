@@ -18,9 +18,9 @@ import com.java.wiki.util.CopyUtil;
 import com.java.wiki.util.RedisUtil;
 import com.java.wiki.util.RequestContext;
 import com.java.wiki.util.SnowFlake;
-import com.java.wiki.websocket.WebSocketServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -165,10 +165,10 @@ public class DocService {
 
         // 推送消息
         Doc docDb = docMapper.selectByPrimaryKey(id);
-        wsService.sendInfo("【" + docDb.getName() + "】被点赞！");
+//        wsService.sendInfo("【" + docDb.getName() + "】被点赞！");
 //        webSocketServer.sendInfo("【" + docDb.getName() + "】被点赞！");
-//        String logId = MDC.get("LOG_ID");
-//        wsService.sendInfo("【" + docDb.getName() + "】被点赞！", logId);
+        String logId = MDC.get("LOG_ID");
+        wsService.sendInfo("【" + docDb.getName() + "】被点赞！", logId);
         // rocketMQTemplate.convertAndSend("VOTE_TOPIC", "【" + docDb.getName() + "】被点赞！");
     }
 
